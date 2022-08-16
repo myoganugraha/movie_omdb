@@ -18,4 +18,7 @@ class MovieModel extends MovieEntity {
         type: json['Type'] as String,
         poster: json['Poster'] as String,
       );
+
+  static List<MovieModel> fromJsonList(List<dynamic> jsonList) =>
+      jsonList.map(MovieModel.fromJson).toList();
 }

@@ -20,5 +20,18 @@ void main() {
       expect(movieModel.type, mockData['Type']);
       expect(movieModel.poster, mockData['Poster']);
     });
+
+    test(
+        'should return list '
+        'from valid json', () {
+      // Given
+      final mockData = mockMovieListModelJson;
+
+      // When
+      final movieListModel = MovieModel.fromJsonList(mockData);
+
+      // Then
+      expect(movieListModel.length, 3);
+    });
   });
 }
