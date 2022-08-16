@@ -18,18 +18,21 @@ void main() {
 
   group('Movie reposiotry impl', () {
     group('should get movie data', () {
-      test('from remote repository', () async {
+      test('from remote datasource', () async {
         // Given
         final mockData = MovieModel.fromJsonList(mockSearchResultJson);
 
-        when(() => mockMovieRemoteDatasource.getMovieBySearch('batman'))
+        when(() => mockMovieRemoteDatasource.getMovieBySearch('bat'))
             .thenAnswer((data) async => mockData);
 
         // When
-        final response = await movieRepositoryImpl.getMovieBySearch('batman');
+        final response = await movieRepositoryImpl.getMovieBySearch('bat');
 
         // Then
         expect(response.length, 3);
+        expect(response[0].title, 'Bat*21');
+        expect(response[0].year, '1988');
+        expect(response[0].type, 'movie');
       });
     });
   });

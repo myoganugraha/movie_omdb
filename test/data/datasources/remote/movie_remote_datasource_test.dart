@@ -51,6 +51,9 @@ void main()  {
 
         //Then
         expect(response.length, 3);
+        expect(response[0].title, 'Batman: Under the Red Hood');
+        expect(response[0].year, '2010');
+        expect(response[0].type, 'movie');
       });
     });
   });
