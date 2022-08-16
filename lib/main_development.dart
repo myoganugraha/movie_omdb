@@ -5,8 +5,9 @@
 // license that can be found in the LICENSE file or at
 // https://opensource.org/licenses/MIT.
 
-import 'package:movie_app/app/app.dart';
+
 import 'package:movie_app/bootstrap.dart';
+import 'package:movie_app/presentation/app/app.dart';
 
 void main() {
   bootstrap(() => const App());

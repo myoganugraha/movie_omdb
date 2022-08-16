@@ -7,8 +7,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:movie_app/counter/counter.dart';
-import 'package:movie_app/l10n/l10n.dart';
+import 'package:movie_app/common/l10n/l10n.dart';
+import 'package:movie_app/presentation/counter/counter.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
