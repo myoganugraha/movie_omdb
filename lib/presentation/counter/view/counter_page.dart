@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/common/l10n/l10n.dart';
+import 'package:movie_app/data/datasources/remote/movie_remote_datasource.dart';
 import 'package:movie_app/presentation/counter/counter.dart';
 
 class CounterPage extends StatelessWidget {
@@ -41,7 +42,9 @@ class CounterView extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           FloatingActionButton(
-            onPressed: () => context.read<CounterCubit>().decrement(),
+            onPressed: () {
+              MovieRemoteDatasource().getMovieBySearch('batman');
+            },
             child: const Icon(Icons.remove),
           ),
         ],

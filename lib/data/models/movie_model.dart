@@ -21,8 +21,8 @@ class MovieModel extends MovieEntity {
 
   static List<MovieModel> fromJsonList(Map<String, dynamic> json) {
     try {
-      final moviesData = json['Search'] as List<Object>;
-      return moviesData.map(MovieModel.fromJson).toList();
+      final mappedData = json['Search'] as List<dynamic>;
+      return mappedData.map(MovieModel.fromJson).toList();
     } catch (err) {
       return [];
     }

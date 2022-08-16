@@ -15,4 +15,3 @@ void main() async {
   await dotenv.load(fileName: 'assets/.env');
   await bootstrap(() => const App());
 }
-
