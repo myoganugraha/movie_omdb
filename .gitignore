@@ -10,7 +10,6 @@
 .history
 .svn/
 .env.*
-test/.env
 
 # IntelliJ related
 *.iml
