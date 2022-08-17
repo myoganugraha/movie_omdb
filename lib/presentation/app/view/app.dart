@@ -6,28 +6,38 @@
 // https://opensource.org/licenses/MIT.
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:movie_app/common/injector/injector.dart';
 import 'package:movie_app/common/l10n/l10n.dart';
-import 'package:movie_app/presentation/counter/counter.dart';
+import 'package:movie_app/presentation/dashboard/cubit/dashboard_cubit.dart';
+import 'package:movie_app/presentation/dashboard/view/dashboard_page.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
-        colorScheme: ColorScheme.fromSwatch(
-          accentColor: const Color(0xFF13B9FF),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => Injector.resolve!<DashboardCubit>(),
         ),
-      ),
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
       ],
-      supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      child: MaterialApp(
+        theme: ThemeData(
+          appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
+          colorScheme: ColorScheme.fromSwatch(
+            accentColor: const Color(0xFF13B9FF),
+          ),
+        ),
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: const DashboardPage(),
+      ),
     );
   }
 }
