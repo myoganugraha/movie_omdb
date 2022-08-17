@@ -28,7 +28,7 @@ class MovieRemoteDatasource {
   Future<MovieDetailsModel> getMovieDetailsByImdbId(String imdbId) async {
     try {
       final result = await _httpClient.get(
-        Uri.parse(DatasourcesConstants.searchMovieEndpoint),
+        Uri.parse(DatasourcesConstants.movieDetailsEndpoint + imdbId),
       );
       return MovieDetailsModel.fromJson(
         jsonDecode(result.body) as Map<String, dynamic>,
