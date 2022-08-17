@@ -10,10 +10,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movie_app/bootstrap.dart';
+import 'package:movie_app/common/injector/injector.dart';
 import 'package:movie_app/presentation/app/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Injector.setup();
   await dotenv.load(fileName: '.env.dev');
   await bootstrap(() => const App());
 }
