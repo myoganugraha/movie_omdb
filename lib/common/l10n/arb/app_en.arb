@@ -1,7 +1,7 @@
 {
     "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
+    "omdbAppBarTitle": "OMDB Movie Search",
+    "@omdbAppBarTitle": {
+        "description": "Text shown in the AppBar of the OOMDB App"
     }
 }
