@@ -14,7 +14,11 @@ class DashboardCubit extends Cubit<DashboardState> {
     try {
       emit(MovieSearchOnLoading());
       final data = await movieUseCase.getMovieBySearch(query);
-      emit(MovieSearchOnSuccess(data));
+      if (data.isNotEmpty) {
+        emit(MovieSearchOnSuccess(data));
+      } else {
+        emit(MovieSearchOnError('No Movies Found \nwith query $query'));
+      }
     } catch (e) {
       emit(MovieSearchOnError(e));
     }
