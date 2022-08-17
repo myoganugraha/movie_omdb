@@ -40,10 +40,7 @@ class App extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,
-        initialRoute: '/dashboard',
-        routes: {
-          '/dashboard': (context) => const DashboardPage()
-        },
+        home: const DashboardPage(),
       ),
     );
   }

@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, always_declare_return_types, inference_failure_on_function_return_type, use_decorated_box
+// ignore_for_file: must_be_immutable, always_declare_return_types, inference_failure_on_function_return_type, use_decorated_box, inference_failure_on_instance_creation, lines_longer_than_80_chars
 
 import 'dart:async';
 
@@ -10,6 +10,7 @@ import 'package:movie_app/common/l10n/l10n.dart';
 import 'package:movie_app/domain/entities/movie_entity.dart';
 import 'package:movie_app/presentation/dashboard/cubit/dashboard_cubit.dart';
 import 'package:movie_app/presentation/dashboard/view/dashboard_view_constants.dart';
+import 'package:movie_app/presentation/details/view/details_page.dart';
 import 'package:movie_app/presentation/size_constants.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -140,7 +141,14 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildPosterWidget(MovieEntity movie) {
     return GestureDetector(
-      onDoubleTap: (){},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => DetailsPage(movieEntity: movie),
+          ),
+        );
+      },
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
