@@ -18,6 +18,13 @@ This project contains 3 flavors:
 - staging
 - production
 
+Setup omdb_apikey on :
+- .env.dev
+- .env.staging
+- .env.prod
+
+Using Flutter 3.0.5 Stable
+
 To run the desired flavor either use the launch configuration in VSCode/Android Studio or use the following commands:
 
 ```sh
