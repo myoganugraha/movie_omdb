@@ -1,4 +1,4 @@
-import 'package:movie_app/data/models/movie_model.dart';
+import 'package:movie_app/domain/entities/movie_entity.dart';
 import 'package:movie_app/domain/repositories/movie_repository.dart';
 
 class MovieUseCase {
@@ -6,7 +6,7 @@ class MovieUseCase {
 
   final MovieRepository movieRepository;
 
-  Future<List<MovieModel>> getMovieBySearch(String query) {
+  Future<List<MovieEntity>> getMovieBySearch(String query) {
     return movieRepository.getMovieBySearch(query);
   }
 }

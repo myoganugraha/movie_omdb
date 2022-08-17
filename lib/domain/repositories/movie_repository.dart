@@ -1,7 +1,6 @@
 // ignore_for_file: one_member_abstracts
-
-import 'package:movie_app/data/models/movie_model.dart';
+import 'package:movie_app/domain/entities/movie_entity.dart';
 
 abstract class MovieRepository {
-  Future<List<MovieModel>> getMovieBySearch(String query);
+  Future<List<MovieEntity>> getMovieBySearch(String query);
 }

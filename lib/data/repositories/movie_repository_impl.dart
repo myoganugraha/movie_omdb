@@ -6,9 +6,10 @@ class MovieRepositoryImpl implements MovieRepository {
   MovieRepositoryImpl({required this.movieRemoteDatasource});
 
   final MovieRemoteDatasource movieRemoteDatasource;
-
+  
   @override
   Future<List<MovieModel>> getMovieBySearch(String query) {
-    return movieRemoteDatasource.getMovieBySearch(query);
+   return movieRemoteDatasource.getMovieBySearch(query);
   }
+
 }

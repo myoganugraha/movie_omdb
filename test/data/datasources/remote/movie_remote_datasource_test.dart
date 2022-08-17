@@ -11,23 +11,17 @@ import 'package:mocktail/mocktail.dart';
 
 import 'package:movie_app/common/__mocks__/http_mock.dart';
 import 'package:movie_app/data/datasources/remote/movie_remote_datasource.dart';
+import 'package:movie_app/data/models/__mocks__/movie_details_model_mock.dart';
 import 'package:movie_app/data/models/__mocks__/movie_model_mock.dart';
 
 import '../../../mock.dart';
 
-void main()  {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   dotenv.testLoad(fileInput: File('test/.env').readAsStringSync());
 
   late http.Client httpClient;
   late MovieRemoteDatasource movieRemoteDatasource;
-
-  final Map<String, dynamic> mockResponse = {
-    'Search': mockMovieListModelJson['Search'],
-    'Response': 'True'
-  };
-
-  const String query = 'batman';
 
   setUp(() {
     httpClient = MockHttpClient();
@@ -42,6 +36,13 @@ void main()  {
     group('to search movie', () {
       test('should call http', () async {
         // Given
+
+        final Map<String, dynamic> mockResponse = {
+          'Search': mockMovieListModelJson['Search'],
+          'Response': 'True'
+        };
+
+        const String query = 'batman';
         when(() => httpClient.get(any())).thenAnswer(
           (_) async => http.Response(jsonEncode(mockResponse), 200),
         );
@@ -54,6 +55,25 @@ void main()  {
         expect(response[0].title, 'Batman: Under the Red Hood');
         expect(response[0].year, '2010');
         expect(response[0].type, 'movie');
+      });
+    });
+
+    group('to get movie details by imdb id', () {
+      test('should cal http', () async {
+        // Given
+        when(() => httpClient.get(any())).thenAnswer(
+          (_) async => http.Response(jsonEncode(mockMovieDetailsModel), 200),
+        );
+
+        // When
+        final response =
+            await movieRemoteDatasource.getMovieDetailsByImdbId('tt0372784');
+
+        //Then
+        expect(response.title, 'Batman Begins');
+        expect(response.year, '2005');
+        expect(response.type, 'movie');
+        expect(response.imdbID, 'tt0372784');
       });
     });
   });
