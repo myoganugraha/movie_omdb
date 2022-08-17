@@ -28,7 +28,7 @@ void main() {
         'getMovieBySearch() return valid data',
         setUp: () =>
             when(() => mockMovieUsecase.getMovieBySearch('bat')).thenAnswer(
-          (invocation) async => result,
+          (_) async => result,
         ),
         build: () => dashboardCubit,
         act: (cubit) => cubit.getMovieBySearch('bat'),

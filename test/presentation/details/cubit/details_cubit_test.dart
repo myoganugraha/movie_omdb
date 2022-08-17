@@ -29,7 +29,7 @@ void main() {
         setUp: () =>
             when(() => mockMovieUsecase.getMovieDetailsByImdbId('tt0372784'))
                 .thenAnswer(
-          (invocation) async => result,
+          (_) async => result,
         ),
         build: () => detailsCubit,
         act: (cubit) => cubit.getMovieDetailsByImdbId('tt0372784'),
