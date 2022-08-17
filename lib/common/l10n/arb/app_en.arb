@@ -3,5 +3,25 @@
     "omdbAppBarTitle": "OMDB Movie Search",
     "@omdbAppBarTitle": {
         "description": "Text shown in the AppBar of the OOMDB App"
+    },
+    "awardsSection":"Awards",
+    "@awardsSection": {
+        "description": "Text shown in the section"
+    },
+    "actorsSection":"Actors",
+    "@actorsSection": {
+        "description": "Text shown in the section"
+    },
+    "directorSection":"Director",
+    "@directorSection": {
+        "description": "Text shown in the section"
+    },
+    "writerSection":"Writers",
+    "@writerSection": {
+        "description": "Text shown in the section"
+    },
+    "boxOfficeSection":"Box Office Value",
+    "@boxOfficeSection": {
+        "description": "Text shown in the section"
     }
 }
