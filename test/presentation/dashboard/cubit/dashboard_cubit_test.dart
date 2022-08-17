@@ -40,6 +40,24 @@ void main() {
           verify(() => mockMovieUsecase.getMovieBySearch('bat')).called(1);
         },
       );
+
+      blocTest<DashboardCubit, DashboardState>(
+        'emits [MovieSearchOnLoading, MovieSearchOnError] when '
+        'getMovieBySearch() failed',
+        setUp: () =>
+            when(() => mockMovieUsecase.getMovieBySearch('bat')).thenThrow(
+          Exception(),
+        ),
+        build: () => dashboardCubit,
+        act: (cubit) => cubit.getMovieBySearch('bat'),
+        expect: () => [
+          isA<MovieSearchOnLoading>(),
+          isA<MovieSearchOnError>(),
+        ],
+        verify: (_) async {
+          verify(() => mockMovieUsecase.getMovieBySearch('bat')).called(1);
+        },
+      );
     });
   });
 }
