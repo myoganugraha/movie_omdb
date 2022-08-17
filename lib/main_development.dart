@@ -14,6 +14,6 @@ import 'package:movie_app/presentation/app/app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: '.env');
+  await dotenv.load(fileName: '.env.dev');
   await bootstrap(() => const App());
 }

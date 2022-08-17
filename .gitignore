@@ -4,12 +4,13 @@
 *.log
 *.pyc
 *.swp
-*.env
 .DS_Store
 .atom/
 .buildlog/
 .history
 .svn/
+.env.*
+test/.env
 
 # IntelliJ related
 *.iml
