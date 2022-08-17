@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:movie_app/common/__mocks__/http_mock.dart';
@@ -20,12 +20,12 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   dotenv.testLoad(fileInput: File('test/.env').readAsStringSync());
 
-  late http.Client httpClient;
+  late Client httpClient;
   late MovieRemoteDatasource movieRemoteDatasource;
 
   setUp(() {
     httpClient = MockHttpClient();
-    movieRemoteDatasource = MovieRemoteDatasource(httpClient: httpClient);
+    movieRemoteDatasource = MovieRemoteDatasource(httpClient);
 
     registerFallbackValue(FakeUri());
   });
@@ -38,7 +38,7 @@ void main() {
         // Given
         const String query = 'bat';
         when(() => httpClient.get(any())).thenAnswer(
-          (_) async => http.Response(jsonEncode(mockSearchResultJson), 200),
+          (_) async => Response(jsonEncode(mockSearchResultJson), 200),
         );
 
         // When
@@ -56,7 +56,7 @@ void main() {
       test('should cal http', () async {
         // Given
         when(() => httpClient.get(any())).thenAnswer(
-          (_) async => http.Response(jsonEncode(mockMovieDetailsModel), 200),
+          (_) async => Response(jsonEncode(mockMovieDetailsModel), 200),
         );
 
         // When
