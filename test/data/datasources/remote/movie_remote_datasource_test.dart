@@ -36,15 +36,9 @@ void main() {
     group('to search movie', () {
       test('should call http', () async {
         // Given
-
-        final Map<String, dynamic> mockResponse = {
-          'Search': mockMovieListModelJson['Search'],
-          'Response': 'True'
-        };
-
-        const String query = 'batman';
+        const String query = 'bat';
         when(() => httpClient.get(any())).thenAnswer(
-          (_) async => http.Response(jsonEncode(mockResponse), 200),
+          (_) async => http.Response(jsonEncode(mockSearchResultJson), 200),
         );
 
         // When
@@ -52,8 +46,8 @@ void main() {
 
         //Then
         expect(response.length, 3);
-        expect(response[0].title, 'Batman: Under the Red Hood');
-        expect(response[0].year, '2010');
+        expect(response[0].title, 'Bat*21');
+        expect(response[0].year, '1988');
         expect(response[0].type, 'movie');
       });
     });
