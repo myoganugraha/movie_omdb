@@ -12,6 +12,7 @@ import 'package:movie_app/common/injector/injector.dart';
 import 'package:movie_app/common/l10n/l10n.dart';
 import 'package:movie_app/presentation/dashboard/cubit/dashboard_cubit.dart';
 import 'package:movie_app/presentation/dashboard/view/dashboard_page.dart';
+import 'package:movie_app/presentation/details/cubit/details_cubit.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -23,10 +24,13 @@ class App extends StatelessWidget {
         BlocProvider(
           create: (_) => Injector.resolve!<DashboardCubit>(),
         ),
+        BlocProvider(
+          create: (_) => Injector.resolve!<DetailsCubit>(),
+        ),
       ],
       child: MaterialApp(
         theme: ThemeData(
-          appBarTheme: const AppBarTheme(color: Color(0xFF13B9FF)),
+          appBarTheme: const AppBarTheme(color: Colors.teal),
           colorScheme: ColorScheme.fromSwatch(
             accentColor: const Color(0xFF13B9FF),
           ),
@@ -36,7 +40,10 @@ class App extends StatelessWidget {
           GlobalMaterialLocalizations.delegate,
         ],
         supportedLocales: AppLocalizations.supportedLocales,
-        home: const DashboardPage(),
+        initialRoute: '/dashboard',
+        routes: {
+          '/dashboard': (context) => const DashboardPage()
+        },
       ),
     );
   }
