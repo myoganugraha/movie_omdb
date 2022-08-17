@@ -1,5 +1,5 @@
-import 'package:kiwi/kiwi.dart';
 import 'package:http/http.dart' as http;
+import 'package:kiwi/kiwi.dart';
 import 'package:movie_app/data/datasources/remote/movie_remote_datasource.dart';
 import 'package:movie_app/data/repositories/movie_repository_impl.dart';
 import 'package:movie_app/domain/repositories/movie_repository.dart';
