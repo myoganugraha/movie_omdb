@@ -22,6 +22,7 @@ dependencies:
 
 dev_dependencies:
   bloc_test: ^9.0.3
+  build_runner: ^2.2.0
   flutter_test:
     sdk: flutter
   kiwi_generator: ^4.0.2
@@ -32,4 +33,6 @@ flutter:
   uses-material-design: true
   generate: true
   assets:
-    - .env
+    - .env.dev
+    - .env.staging
+    - .env.prod
