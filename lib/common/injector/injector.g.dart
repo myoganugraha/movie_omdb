@@ -14,7 +14,8 @@ class _$Injector extends Injector {
     final container = KiwiContainer();
     container
       ..registerSingleton(
-          (c) => DashboardCubit(movieUseCase: c<MovieUseCase>()),)
+        (c) => DashboardCubit(movieUseCase: c<MovieUseCase>()),
+      )
       ..registerSingleton((c) => DetailsCubit(movieUseCase: c<MovieUseCase>()));
   }
 
@@ -22,20 +23,29 @@ class _$Injector extends Injector {
   void _configureUsecases() {
     final container = KiwiContainer();
     container.registerSingleton(
-        (c) => MovieUseCase(movieRepository: c<MovieRepository>()),);
+      (c) => MovieUseCase(movieRepository: c<MovieRepository>()),
+    );
   }
 
   @override
   void _configureRepositories() {
     final container = KiwiContainer();
-    container.registerSingleton<MovieRepository>((c) =>
-        MovieRepositoryImpl(movieRemoteDatasource: c<MovieRemoteDatasource>()),);
+    container.registerSingleton<MovieRepository>(
+      (c) => MovieRepositoryImpl(
+        movieRemoteDatasource: c<MovieRemoteDatasource>(),
+      ),
+    );
   }
 
   @override
   void _configureRemoteDatasources() {
     final container = KiwiContainer();
-    container.registerSingleton(
-        (c) => MovieRemoteDatasource(httpClient: c<http.Client>()),);
+    container.registerSingleton((c) => MovieRemoteDatasource(c<Client>()));
+  }
+
+  @override
+  void _configureHttpClient() {
+    final container = KiwiContainer();
+    container.registerSingleton((c) => Client());
   }
 }

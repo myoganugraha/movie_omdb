@@ -1,4 +1,4 @@
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:movie_app/data/datasources/remote/movie_remote_datasource.dart';
 import 'package:movie_app/data/repositories/movie_repository_impl.dart';
@@ -26,6 +26,7 @@ abstract class Injector {
     _configureUsecases();
     _configureRepositories();
     _configureRemoteDatasources();
+    _configureHttpClient();
   }
 
 // ============ BLOCS / CUBITS ============
@@ -47,4 +48,7 @@ abstract class Injector {
 // ============ REMOTE DATASOURCES ============
   @Register.singleton(MovieRemoteDatasource)
   void _configureRemoteDatasources();
+
+  @Register.singleton(Client)
+  void _configureHttpClient();
 }
