@@ -2,16 +2,15 @@
 
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:movie_app/data/datasources/constants.dart';
 import 'package:movie_app/data/models/movie_details_model.dart';
 import 'package:movie_app/data/models/movie_model.dart';
 
 class MovieRemoteDatasource {
-  MovieRemoteDatasource({http.Client? httpClient})
-      : _httpClient = httpClient ?? http.Client();
+  MovieRemoteDatasource(this._httpClient);
 
-  final http.Client _httpClient;
+  final Client _httpClient;
 
   Future<List<MovieModel>> getMovieBySearch(String query) async {
     try {
