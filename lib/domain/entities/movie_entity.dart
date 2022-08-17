@@ -1,5 +1,4 @@
 class MovieEntity {
-
   MovieEntity({
     required this.title,
     required this.year,
@@ -7,7 +6,7 @@ class MovieEntity {
     required this.type,
     required this.poster,
   });
-  
+
   final String title;
   final String year;
   final String imdbID;
