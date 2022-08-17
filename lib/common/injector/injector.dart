@@ -5,6 +5,7 @@ import 'package:movie_app/data/repositories/movie_repository_impl.dart';
 import 'package:movie_app/domain/repositories/movie_repository.dart';
 import 'package:movie_app/domain/usecases/movie_usecase.dart';
 import 'package:movie_app/presentation/dashboard/cubit/dashboard_cubit.dart';
+import 'package:movie_app/presentation/details/cubit/details_cubit.dart';
 
 part 'injector.g.dart';
 
@@ -29,6 +30,7 @@ abstract class Injector {
 
 // ============ BLOCS / CUBITS ============
   @Register.singleton(DashboardCubit)
+  @Register.singleton(DetailsCubit)
   void _configureBlocs();
 
 // ============ USECASES ============
