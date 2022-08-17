@@ -58,7 +58,7 @@ void main() {
       });
     });
 
-    group('to get movie details by imdb id', () {
+    group('to get movie details by IMDB id', () {
       test('should cal http', () async {
         // Given
         when(() => httpClient.get(any())).thenAnswer(
