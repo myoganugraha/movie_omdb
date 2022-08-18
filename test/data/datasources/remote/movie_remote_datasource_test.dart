@@ -1,4 +1,4 @@
-// ignore_for_file: omit_local_variable_types
+// ignore_for_file: omit_local_variable_types, unnecessary_type_check
 
 import 'dart:convert';
 import 'dart:io';
@@ -33,8 +33,8 @@ void main() {
   tearDownAll(() {});
 
   group('Movie remote datasource', () {
-    group('to search movie', () {
-      test('should call http', () async {
+    group('getMovieBySearch() when call http', () {
+      test('should get valid data', () async {
         // Given
         const String query = 'bat';
         when(() => httpClient.get(any())).thenAnswer(
@@ -50,10 +50,29 @@ void main() {
         expect(response[0].year, '1988');
         expect(response[0].type, 'movie');
       });
+
+      test('throw Exception', () async {
+        // Given
+        String error = '';
+        when(() => httpClient.get(any())).thenThrow(Exception(''));
+
+        // When
+        try {
+          
+              await movieRemoteDatasource.getMovieBySearch('bat');
+        } catch (e) {
+          error = e.toString();
+        }
+
+        //Then
+        expect(error is String, true);
+        expect(error.isNotEmpty, true);
+        expect(error, 'Exception: Exception: ');
+      });
     });
 
-    group('to get movie details by IMDB id', () {
-      test('should cal http', () async {
+    group('getMovieDetailsByImdbId() when call http request ', () {
+      test('return valid data', () async {
         // Given
         when(() => httpClient.get(any())).thenAnswer(
           (_) async => Response(jsonEncode(mockMovieDetailsModel), 200),
@@ -68,6 +87,25 @@ void main() {
         expect(response.year, '2005');
         expect(response.type, 'movie');
         expect(response.imdbID, 'tt0372784');
+      });
+
+      test('return Exception()', () async {
+        // Given
+        String error = '';
+        when(() => httpClient.get(any())).thenThrow(Exception(''));
+
+        // When
+        try {
+          
+              await movieRemoteDatasource.getMovieDetailsByImdbId('tt0372784');
+        } catch (e) {
+          error = e.toString();
+        }
+
+        //Then
+        expect(error is String, true);
+        expect(error.isNotEmpty, true);
+        expect(error, 'Exception: Exception: ');
       });
     });
   });
