@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/common/injector/injector.dart';
+import 'package:movie_app/common/injector/injector_support.dart';
 import 'package:movie_app/common/l10n/l10n.dart';
 import 'package:movie_app/domain/entities/movie_entity.dart';
 import 'package:movie_app/presentation/dashboard/cubit/dashboard_cubit.dart';
@@ -27,13 +27,13 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   void initState() {
-    dashboardCubit = Injector.resolve!<DashboardCubit>();
+    dashboardCubit = InjectorSupport.resolve<DashboardCubit>();
     super.initState();
   }
 
   @override
   void dispose() {
-    _debounce!.cancel();
+    _debounce?.cancel();
     super.dispose();
   }
 
@@ -95,8 +95,11 @@ class _DashboardPageState extends State<DashboardPage> {
                 return _buildTextWidget('Search movies');
               } else {
                 return const Expanded(
+                  key: DashboardViewConstants.onLoadingContainerKey,
                   child: Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                      key: DashboardViewConstants.onLoadingSpinnerKey,
+                    ),
                   ),
                 );
               }

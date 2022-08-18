@@ -3,7 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/common/injector/injector.dart';
+import 'package:movie_app/common/injector/injector_support.dart';
 import 'package:movie_app/common/l10n/l10n.dart';
 import 'package:movie_app/domain/entities/movie_entity.dart';
 import 'package:movie_app/presentation/details/cubit/details_cubit.dart';
@@ -23,7 +23,7 @@ class _DetailsPageState extends State<DetailsPage> {
 
   @override
   void initState() {
-    detailsCubit = Injector.resolve!<DetailsCubit>()
+    detailsCubit = InjectorSupport.resolve<DetailsCubit>()
       ..getMovieDetailsByImdbId(widget.movieEntity.imdbID);
     super.initState();
   }
