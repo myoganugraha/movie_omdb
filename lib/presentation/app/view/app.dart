@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:movie_app/common/injector/injector.dart';
+import 'package:movie_app/common/injector/injector_support.dart';
 import 'package:movie_app/common/l10n/l10n.dart';
 import 'package:movie_app/presentation/dashboard/cubit/dashboard_cubit.dart';
 import 'package:movie_app/presentation/dashboard/view/dashboard_page.dart';
@@ -22,10 +22,10 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => Injector.resolve!<DashboardCubit>(),
+          create: (_) => InjectorSupport.resolve<DashboardCubit>(),
         ),
         BlocProvider(
-          create: (_) => Injector.resolve!<DetailsCubit>(),
+          create: (_) => InjectorSupport.resolve<DetailsCubit>(),
         ),
       ],
       child: MaterialApp(

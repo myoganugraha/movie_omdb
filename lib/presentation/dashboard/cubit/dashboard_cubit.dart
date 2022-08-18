@@ -7,7 +7,6 @@ part 'dashboard_state.dart';
 
 class DashboardCubit extends Cubit<DashboardState> {
   DashboardCubit({required this.movieUseCase}) : super(DashboardInitial());
-
   final MovieUseCase movieUseCase;
 
   Future<void> getMovieBySearch(String query) async {

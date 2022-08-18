@@ -6,7 +6,7 @@ MovieDetailsEntity mockMovieDetailsEntity = MovieDetailsEntity(
   rated: 'rated',
   released: 'released',
   runtime: 'runtime',
-  genre: 'genre',
+  genre: 'genre, ',
   director: 'director',
   writer: 'writer',
   actors: 'actors',

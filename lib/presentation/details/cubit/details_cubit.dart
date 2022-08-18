@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:movie_app/domain/entities/movie_details_entity.dart';
@@ -14,11 +12,9 @@ class DetailsCubit extends Cubit<DetailsState> {
   Future<void> getMovieDetailsByImdbId(String imdbId) async {
     try {
       emit(FetchDetailsOnLoading());
-      log(imdbId);
       final data = await movieUseCase.getMovieDetailsByImdbId(imdbId);
       emit(FetchDetailsOnSuccess(data));
     } catch (e) {
-      log(e.toString());
       emit(FetchDetailsOnError(e));
     }
   }

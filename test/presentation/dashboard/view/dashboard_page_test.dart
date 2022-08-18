@@ -40,7 +40,9 @@ void main() {
   }
 
   group('DashboardPage', () {
-    testWidgets('render screen with loading', (tester) async {
+    testWidgets(
+        'render screen with loading when state is MovieSearchOnLoading()',
+        (tester) async {
       // Given
       when(() => dashboardCubit.state)
           .thenAnswer((_) => MovieSearchOnLoading());
@@ -56,12 +58,12 @@ void main() {
       // Then
       for (final element in _keyToFind) {
         final bodyChildWidgetFinder = find.byKey(element);
-        //Then
+
         expect(bodyChildWidgetFinder, findsOneWidget);
       }
     });
 
-    testWidgets('render screen show data while fetching data is succeed',
+    testWidgets('render screen show data when state is MovieSearchOnSuccess()',
         (tester) async {
       // Given
       when(() => dashboardCubit.state).thenAnswer(
@@ -78,7 +80,8 @@ void main() {
       expect(content, findsOneWidget);
     });
 
-    testWidgets('render screen show error text while fetchin data is failed',
+    testWidgets(
+        'render screen show error text when state is MovieSearchOnError()',
         (tester) async {
       // Given
       when(() => dashboardCubit.state).thenAnswer(

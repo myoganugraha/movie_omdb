@@ -7,6 +7,7 @@ import 'package:movie_app/common/injector/injector_support.dart';
 import 'package:movie_app/common/l10n/l10n.dart';
 import 'package:movie_app/domain/entities/movie_entity.dart';
 import 'package:movie_app/presentation/details/cubit/details_cubit.dart';
+import 'package:movie_app/presentation/details/view/details_view_constants.dart';
 import 'package:movie_app/presentation/size_constants.dart';
 
 class DetailsPage extends StatefulWidget {
@@ -25,6 +26,7 @@ class _DetailsPageState extends State<DetailsPage> {
   void initState() {
     detailsCubit = InjectorSupport.resolve<DetailsCubit>()
       ..getMovieDetailsByImdbId(widget.movieEntity.imdbID);
+    genres = [];
     super.initState();
   }
 
@@ -32,6 +34,7 @@ class _DetailsPageState extends State<DetailsPage> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     return Scaffold(
+      key: DetailsViewConstants.detailsScaffoldKey,
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.black,
       body: CustomScrollView(
@@ -55,13 +58,8 @@ class _DetailsPageState extends State<DetailsPage> {
           SliverToBoxAdapter(
             child: ConstrainedBox(
               constraints: const BoxConstraints(),
-              child: BlocConsumer(
+              child: BlocBuilder<DetailsCubit, DetailsState>(
                 bloc: detailsCubit,
-                listener: (context, state) {
-                  if (state is FetchDetailsOnSuccess) {
-                    genres = state.movieDetailsData.genre.split(',');
-                  }
-                },
                 builder: (context, state) {
                   if (state is FetchDetailsOnSuccess) {
                     return Padding(
@@ -72,16 +70,23 @@ class _DetailsPageState extends State<DetailsPage> {
                           sectionWidget(
                             sectionTitle: state.movieDetailsData.rated,
                             sectionContent: '',
+                            titleKey: DetailsViewConstants.ratedTitleKey,
+                            contentKey: DetailsViewConstants.ratedContentKey,
                           ),
                           const SizedBox(
                             height: SizeConstants.size_8,
                           ),
-                          genreWidget(),
+                          Visibility(
+                            visible: genres.isNotEmpty,
+                            child:
+                                genreWidget(key: DetailsViewConstants.genreKey),
+                          ),
                           const SizedBox(
                             height: SizeConstants.size_16,
                           ),
                           Text(
                             state.movieDetailsData.plot,
+                            key: DetailsViewConstants.plotKey,
                             style: const TextStyle(
                               fontSize: SizeConstants.size_16,
                               color: Colors.white,
@@ -90,6 +95,8 @@ class _DetailsPageState extends State<DetailsPage> {
                           sectionWidget(
                             sectionTitle: l10n.awardsSection,
                             sectionContent: state.movieDetailsData.awards,
+                            titleKey: DetailsViewConstants.awardTitleKey,
+                            contentKey: DetailsViewConstants.awardContentKey,
                           ),
                           sectionWidget(
                             sectionTitle: l10n.actorsSection,
@@ -111,7 +118,9 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                     );
                   }
-                  return const LinearProgressIndicator();
+                  return const LinearProgressIndicator(
+                    key: DetailsViewConstants.linearProgressKey,
+                  );
                 },
               ),
             ),
@@ -121,8 +130,9 @@ class _DetailsPageState extends State<DetailsPage> {
     );
   }
 
-  Widget genreWidget() {
+  Widget genreWidget({Key? key}) {
     return Row(
+      key: key,
       children: genres
           .map(
             (e) => Container(
@@ -154,6 +164,8 @@ class _DetailsPageState extends State<DetailsPage> {
   Widget sectionWidget({
     required String sectionTitle,
     required String sectionContent,
+    Key? titleKey,
+    Key? contentKey,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -163,6 +175,7 @@ class _DetailsPageState extends State<DetailsPage> {
         ),
         Text(
           sectionTitle,
+          key: titleKey,
           style: const TextStyle(
             color: Colors.white,
             fontSize: SizeConstants.size_20,
@@ -171,6 +184,7 @@ class _DetailsPageState extends State<DetailsPage> {
         ),
         Text(
           sectionContent,
+          key: contentKey,
           style: const TextStyle(
             color: Colors.white,
             fontSize: SizeConstants.size_14,

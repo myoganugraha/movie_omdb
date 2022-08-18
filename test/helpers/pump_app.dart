@@ -23,7 +23,6 @@ extension PumpApp on WidgetTester {
         ],
         supportedLocales: AppLocalizations.supportedLocales,
         home: widget,
-        navigatorObservers: [observer!],
       ),
     );
   }
