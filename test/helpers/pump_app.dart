@@ -11,7 +11,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:movie_app/common/l10n/l10n.dart';
 
 extension PumpApp on WidgetTester {
-  Future<void> pumpApp(Widget widget) {
+  Future<void> pumpApp(
+    Widget widget,{
+    NavigatorObserver? observer,}
+  ) {
     return pumpWidget(
       MaterialApp(
         localizationsDelegates: const [
@@ -20,6 +23,7 @@ extension PumpApp on WidgetTester {
         ],
         supportedLocales: AppLocalizations.supportedLocales,
         home: widget,
+        navigatorObservers: [observer!],
       ),
     );
   }

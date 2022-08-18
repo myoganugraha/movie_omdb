@@ -112,9 +112,11 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildTextWidget(dynamic msg) {
     return Expanded(
+      key: DashboardViewConstants.messageContainerKey,
       child: Center(
         child: Text(
           msg.toString(),
+          key: DashboardViewConstants.messageTextKey,
           textAlign: TextAlign.center,
           style: const TextStyle(
             color: Colors.white,
@@ -127,6 +129,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildOnLoadedWidget(List<MovieEntity> movieList) {
     return Expanded(
+      key: DashboardViewConstants.onMovieLoadedContainerKey,
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: SizeConstants.size_2,
@@ -144,6 +147,7 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget _buildPosterWidget(MovieEntity movie) {
     return GestureDetector(
+      key: ValueKey('${movie.imdbID}_content_key'),
       onTap: () {
         Navigator.push(
           context,
