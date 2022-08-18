@@ -40,6 +40,29 @@ void main() {
   }
 
   group('DashboardPage', () {
+    
+    testWidgets(
+        'render screen with message when state is DashboardInitial()',
+        (tester) async {
+      // Given
+      when(() => dashboardCubit.state)
+          .thenAnswer((_) => DashboardInitial());
+
+      await _buildDashboardPage(tester);
+
+      // When
+      final List<ValueKey> _keyToFind = [
+        DashboardViewConstants.messageContainerKey,
+      ];
+
+      // Then
+      for (final element in _keyToFind) {
+        final bodyChildWidgetFinder = find.byKey(element);
+
+        expect(bodyChildWidgetFinder, findsOneWidget);
+      }
+    });
+
     testWidgets(
         'render screen with loading when state is MovieSearchOnLoading()',
         (tester) async {
