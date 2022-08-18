@@ -43,6 +43,24 @@ void main() {
 
       blocTest<DashboardCubit, DashboardState>(
         'emits [MovieSearchOnLoading, MovieSearchOnError] when '
+        'getMovieBySearch() return empty data',
+        setUp: () =>
+            when(() => mockMovieUsecase.getMovieBySearch('bat')).thenAnswer(
+          (_) async => [],
+        ),
+        build: () => dashboardCubit,
+        act: (cubit) => cubit.getMovieBySearch('bat'),
+        expect: () => [
+          isA<MovieSearchOnLoading>(),
+          isA<MovieSearchOnError>(),
+        ],
+        verify: (_) async {
+          verify(() => mockMovieUsecase.getMovieBySearch('bat')).called(1);
+        },
+      );
+
+      blocTest<DashboardCubit, DashboardState>(
+        'emits [MovieSearchOnLoading, MovieSearchOnError] when '
         'getMovieBySearch() failed',
         setUp: () =>
             when(() => mockMovieUsecase.getMovieBySearch('bat')).thenThrow(
