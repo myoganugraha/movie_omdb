@@ -7,7 +7,7 @@ void main() {
       // Given
       const movieTitle = 'title';
       const movieYear = '2022';
-      const movieImdbID = '12323';
+      const movieImdbID = 'tt0052602';
       const movieType = 'movie';
       const moviePoster = 'www.google.com';
 
