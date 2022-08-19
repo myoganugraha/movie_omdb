@@ -66,7 +66,14 @@ class _DashboardPageState extends State<DashboardPage> {
             child: TextField(
               key: DashboardViewConstants.searchFieldKey,
               controller: searchTextFieldController,
-              onChanged: _onSearchChanged,
+              onChanged: (query) {
+                if (_debounce?.isActive ?? false) _debounce!.cancel();
+                _debounce = Timer(const Duration(milliseconds: 800), () {
+                  if (query.length > 1) {
+                    dashboardCubit.getMovieBySearch(query);
+                  }
+                });
+              },
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
@@ -166,14 +173,5 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
       ),
     );
-  }
-
-  _onSearchChanged(String query) {
-    if (_debounce?.isActive ?? false) _debounce!.cancel();
-    _debounce = Timer(const Duration(milliseconds: 800), () {
-      if (query.length > 1) {
-        dashboardCubit.getMovieBySearch(query);
-      }
-    });
   }
 }

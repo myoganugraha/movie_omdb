@@ -23,7 +23,7 @@ void main() {
 
     test(
         'should return list '
-        'from valid json', () {
+        'from valid json structure', () {
       // Given
       final mockData = mockMovieListModelJson;
 
@@ -32,6 +32,19 @@ void main() {
 
       // Then
       expect(movieListModel.length, 3);
+    });
+
+    test(
+        'should return empty list '
+        'from invalid json structure', () {
+      // Given
+      final mockData = mockMovieModelJson;
+
+      // When
+      final movieListModel = MovieModel.fromJsonList(mockData);
+
+      // Then
+      expect(movieListModel.length, 0);
     });
   });
 }
