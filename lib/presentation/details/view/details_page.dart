@@ -58,7 +58,12 @@ class _DetailsPageState extends State<DetailsPage> {
           SliverToBoxAdapter(
             child: ConstrainedBox(
               constraints: const BoxConstraints(),
-              child: BlocBuilder<DetailsCubit, DetailsState>(
+              child: BlocConsumer<DetailsCubit, DetailsState>(
+                listener: (context, state) {
+                  if (state is FetchDetailsOnSuccess) {
+                    genres = state.movieDetailsData.genre.split(',');
+                  }
+                },
                 bloc: detailsCubit,
                 builder: (context, state) {
                   if (state is FetchDetailsOnSuccess) {
