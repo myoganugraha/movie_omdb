@@ -199,7 +199,7 @@ void main() {
       await tester.pump(const Duration(milliseconds: 800));
 
       // Then
-      expect(find.byKey(searchField.key!), findsOneWidget);
+      verify(() => dashboardCubit.getMovieBySearch('batman')).called(1);
     });
   });
 }
