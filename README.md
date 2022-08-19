@@ -1,6 +1,6 @@
 # Movie App
 
-![Coverage](./coverage_badge.svg?sanitize=true)
+![coverage](./coverage_badge.svg?sanitize=true)
 [![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
