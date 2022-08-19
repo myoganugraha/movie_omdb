@@ -108,6 +108,39 @@ void main() {
     });
 
     testWidgets(
+        'render screen with genre item '
+        'while FetchDetailsOnSuccess()', (tester) async {
+      // Given
+      when(() => detailsCubit.getMovieDetailsByImdbId(mockMovieEntity.imdbID))
+          .thenAnswer((_) async {});
+      whenListen(
+        detailsCubit,
+        Stream.fromIterable([
+          FetchDetailsOnLoading(),
+          FetchDetailsOnSuccess(
+            MovieDetailsModel.fromJson(mockMovieDetailsModel),
+          ),
+        ]),
+      );
+      when(() => detailsCubit.state).thenAnswer(
+        (_) => FetchDetailsOnSuccess(
+          MovieDetailsModel.fromJson(mockMovieDetailsModel),
+        ),
+      );
+
+
+      // When
+      final genreWidgetFinder = find.byKey(DetailsViewConstants.genreKey);
+      
+      await _buildDetailsPage(tester);
+      expect(genreWidgetFinder, findsNothing);
+      await tester.pump();
+
+      //Then
+      expect(genreWidgetFinder, findsOneWidget);
+    });
+
+    testWidgets(
         'render screen with linear progress indicator '
         'while FetchDetailsOnError()', (tester) async {
       // Given
